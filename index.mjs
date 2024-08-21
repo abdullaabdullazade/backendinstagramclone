@@ -3,6 +3,8 @@ import nodemailer from "nodemailer";
 import crypto from "crypto";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set, get, update } from "firebase/database";
+const cors = require('cors');
+app.use(cors());
 
 const firebaseConfig = {
   apiKey: "AIzaSyBU-515LpoouRXRzltgKVi8PSUCj00pte0",
