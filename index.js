@@ -1,8 +1,13 @@
-import express from "express";
-import nodemailer from "nodemailer";
-import crypto from "crypto";
-import { initializeApp } from "firebase/app";
-import { getDatabase, ref, set, get, update } from "firebase/database";
+const express = require("express");
+const nodemailer = require("nodemailer");
+const crypto = require("crypto");
+const { initializeApp } = require("firebase/app");
+const { getDatabase, ref, set, get, update } = require("firebase/database");
+const cors = require("cors");
+
+
+
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyBU-515LpoouRXRzltgKVi8PSUCj00pte0",
@@ -18,7 +23,7 @@ const firebase = initializeApp(firebaseConfig);
 const database = getDatabase(firebase);
 const app = express();
 app.use(express.json());
-
+app.use(cors())
 app.post("/resetpassword", (req, res) => {
   const { email, username } = req.body;
 
