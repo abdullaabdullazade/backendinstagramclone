@@ -1,9 +1,9 @@
-const express = require("express");
-const nodemailer = require("nodemailer");
-const crypto = require("crypto");
-const { initializeApp } = require("firebase/app");
-const { getDatabase, ref, set, get, update } = require("firebase/database");
-const cors = require("cors");
+import express from "express";
+import nodemailer from "nodemailer";
+import crypto from "crypto";
+import { initializeApp } from "firebase/app";
+import { getDatabase, ref, set, get, update } from "firebase/database";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyBU-515LpoouRXRzltgKVi8PSUCj00pte0",
@@ -234,6 +234,6 @@ app.post("/resetpassword/:token", (req, res) => {
     });
 });
 
-app.listen(3000, () => {
+app.listen(5000, () => {
   console.log("Server is running on port 3000");
 });
