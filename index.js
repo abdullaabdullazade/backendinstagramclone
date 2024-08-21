@@ -25,7 +25,7 @@ app.post("/resetpassword", (req, res) => {
   const { email, username } = req.body;
 
   const resetToken = crypto.randomBytes(32).toString("hex");
-  const resetLink = `https://resetpasswordinstagram1.vercel.app/resetpassword/${resetToken}`;
+  const resetLink = `https://resetpasswordinstagram.vercel.app/resetpassword/${resetToken}`;
 
   const resetRef = ref(database, `passwordResets/${resetToken}`);
   set(resetRef, { username, email, resetToken })
