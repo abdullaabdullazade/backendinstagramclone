@@ -21,11 +21,11 @@ const database = getDatabase(firebase);
 const app = express();
 
 app.use(express.json());
-app.use(cors()); // CORS problemini həll etmək üçün əlavə etdim
+app.use(cors()); 
 
 app.post("/resetpassword", (req, res) => {
   const { email, username } = req.body;
-
+  console.log(email,username)
   const resetToken = crypto.randomBytes(32).toString("hex");
   const resetLink = `https://resetpasswordinstagram1.vercel.app/resetpassword/${resetToken}`;
 
@@ -199,7 +199,7 @@ app.get("/resetpassword/:token", (req, res) => {
 app.post("/resetpassword/:token", (req, res) => {
   const { token } = req.params;
   const { password, newPassword } = req.body;
-
+  
   if (!password || !newPassword) {
     return res.status(400).send("Both password fields are required.");
   }
