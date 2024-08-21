@@ -109,7 +109,7 @@ app.get("/resetpassword/:token", (req, res) => {
                 width: 100%;
                 padding: 10px;
                 margin: 10px 0;
-                border: 1px solid #ddd;
+                borvder: 1px solid #ddd;
                 border-radius: 5px;
               }
 
