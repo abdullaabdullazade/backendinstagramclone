@@ -5,10 +5,7 @@ const { initializeApp } = require("firebase/app");
 const { getDatabase, ref, set, get, update } = require("firebase/database");
 const cors = require("cors");
 
-
-
-
-
+// Firebase konfiqurasiya parametrləri
 const firebaseConfig = {
   apiKey: "AIzaSyBU-515LpoouRXRzltgKVi8PSUCj00pte0",
   authDomain: "instagram-78503.firebaseapp.com",
@@ -22,8 +19,10 @@ const firebaseConfig = {
 const firebase = initializeApp(firebaseConfig);
 const database = getDatabase(firebase);
 const app = express();
+
 app.use(express.json());
-app.use(cors())
+app.use(cors()); // CORS problemini həll etmək üçün əlavə etdim
+
 app.post("/resetpassword", (req, res) => {
   const { email, username } = req.body;
 
@@ -37,7 +36,7 @@ app.post("/resetpassword", (req, res) => {
         service: "gmail",
         auth: {
           user: "metalninjas1@gmail.com",
-          pass: "uqzg ckqk qbty sfvu",
+          pass: "uyğun olan tətbiq şifrəsi burada",
         },
       });
 
@@ -54,9 +53,7 @@ app.post("/resetpassword", (req, res) => {
           return res.status(500).send("Error occurred while sending email");
         } else {
           console.log("Email sent successfully");
-          return res
-            .status(200)
-            .send("Reset link has been sent to your email.");
+          return res.status(200).send("Reset link has been sent to your email.");
         }
       });
     })
@@ -69,7 +66,7 @@ app.post("/resetpassword", (req, res) => {
 app.get("/resetpassword/:token", (req, res) => {
   const { token } = req.params;
   const resetRef = ref(database, `passwordResets/${token}`);
-  console.log(get(resetRef));
+
   get(resetRef)
     .then((snapshot) => {
       if (snapshot.exists()) {
@@ -114,7 +111,7 @@ app.get("/resetpassword/:token", (req, res) => {
                 width: 100%;
                 padding: 10px;
                 margin: 10px 0;
-                borvder: 1px solid #ddd;
+                border: 1px solid #ddd;
                 border-radius: 5px;
               }
 
