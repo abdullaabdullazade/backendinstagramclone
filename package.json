@@ -4,7 +4,7 @@
   "main": "nodemon index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "run": "nodemon index.js"
+    "start": "nodemon index.mjs"
   },
   "author": "",
   "license": "ISC",
