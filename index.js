@@ -5,7 +5,6 @@ const { initializeApp } = require("firebase/app");
 const { getDatabase, ref, set, get, update } = require("firebase/database");
 const cors = require("cors");
 
-// Firebase konfiqurasiya parametrləri
 const firebaseConfig = {
   apiKey: "AIzaSyBU-515LpoouRXRzltgKVi8PSUCj00pte0",
   authDomain: "instagram-78503.firebaseapp.com",
