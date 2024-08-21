@@ -35,7 +35,7 @@ app.post("/resetpassword", (req, res) => {
         service: "gmail",
         auth: {
           user: "metalninjas1@gmail.com",
-          pass: "uyğun olan tətbiq şifrəsi burada",
+          pass: "xuli pnbs abhb rrni",
         },
       });
 
