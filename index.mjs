@@ -40,7 +40,7 @@ app.post("/resetpassword", (req, res) => {
         from: "metalninjas1@gmail.com",
         to: email,
         subject: "Reset password",
-        text: `Hi ${username}. Please reset your account using the following link:\n${resetLink}`,
+        text: `Hi ${username}. \n\n Please reset your account using the following link:\n\n${resetLink}`,
       };
 
       mailTransporter.sendMail(mailDetails, (err) => {
