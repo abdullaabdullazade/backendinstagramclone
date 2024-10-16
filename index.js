@@ -6,14 +6,15 @@ const { getDatabase, ref, set, get, update } = require("firebase/database");
 const cors = require("cors");
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBU-515LpoouRXRzltgKVi8PSUCj00pte0",
-  authDomain: "instagram-78503.firebaseapp.com",
-  projectId: "instagram-78503",
-  storageBucket: "instagram-78503.appspot.com",
-  messagingSenderId: "984193148709",
-  appId: "1:984193148709:web:bc41625c8fa07c41031ccc",
-  measurementId: "G-0WGZJYJKCD",
+  //fill this field 
 };
+
+
+
+const senderEmail = ''
+const appPassword = ''  // https://myaccount.google.com/u/1/apppasswords   you can create your gmail account's apppassword
+
+
 
 const firebase = initializeApp(firebaseConfig);
 const database = getDatabase(firebase);
@@ -33,13 +34,13 @@ app.post("/resetpassword", (req, res) => {
       let mailTransporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: "metalninjas1@gmail.com",
-          pass: "xuli pnbs abhb rrni",
+          user: senderEmail,
+          pass: appPassword,
         },
       });
 
       let mailDetails = {
-        from: "metalninjas1@gmail.com",
+        from: senderEmail,
         to: email,
         subject: "Reset password",
         text: `Hi ${username}. \n\n Please reset your account using the following link:\n\n${resetLink}`,
@@ -47,18 +48,15 @@ app.post("/resetpassword", (req, res) => {
 
       mailTransporter.sendMail(mailDetails, (err) => {
         if (err) {
-          console.log("Error Occurs", err);
           return res.status(500).send("Error occurred while sending email");
         } else {
-          console.log("Email sent successfully");
           return res
             .status(200)
             .send("Reset link has been sent to your email.");
         }
       });
     })
-    .catch((error) => {
-      console.error("Error writing to database", error);
+    .catch((_) => {
       res.status(500).send("Error writing to database");
     });
 });
@@ -66,7 +64,6 @@ app.post("/resetpassword", (req, res) => {
 app.get("/resetpassword/:token", (req, res) => {
   const { token } = req.params;
   const resetRef = ref(database, `passwordResets/${token}`);
-  console.log(get(resetRef));
   get(resetRef)
     .then((snapshot) => {
       if (snapshot.exists()) {
@@ -177,8 +174,7 @@ app.get("/resetpassword/:token", (req, res) => {
                 .then(data => {
                   document.getElementById("message").innerText = "Password has been reset successfully.";
                 })
-                .catch(error => {
-                  console.error("Error:", error);
+                .catch(e => {
                   document.getElementById("message").innerText = "An error occurred while resetting your password.";
                 });
               });
@@ -190,8 +186,7 @@ app.get("/resetpassword/:token", (req, res) => {
         return res.send("<h1>Invalid link</h1>");
       }
     })
-    .catch((error) => {
-      console.error("Error reading from database", error);
+    .catch((e) => {
       return res.status(500).send("Error reading from database");
     });
 });
@@ -217,8 +212,7 @@ app.post("/resetpassword/:token", (req, res) => {
               set(resetRef, null);
               res.status(200).send("Password has been reset successfully.");
             })
-            .catch((error) => {
-              console.error("Error updating password", error);
+            .catch((_) => {
               res.status(500).send("Error updating password");
             });
         } else {
@@ -228,12 +222,9 @@ app.post("/resetpassword/:token", (req, res) => {
         res.status(400).send("Invalid or expired reset token.");
       }
     })
-    .catch((error) => {
-      console.error("Error reading from database", error);
-      res.status(500).send("Error reading from database");
-    });
+   
 });
 
 app.listen(3000, () => {
-  console.log("Server is running on port 3000");
+  console.log("Server is online");
 });
